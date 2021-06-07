@@ -51,9 +51,9 @@ def update_db():
         update_data(conn, pairs)
 
 
-while True:
-    print("Updating every %s s" % UPDATE_INTERVAL_SECONDS)
+print("Updating every %s s" % UPDATE_INTERVAL_SECONDS)
 
+while True:
     print("Fetching new data at %s" % datetime.datetime.now().time())
     try:
         update_db()
