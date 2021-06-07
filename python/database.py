@@ -36,6 +36,8 @@ def create_db():
                 for q in res:
                     pass
 
+            conn.commit()
+
 
 def delete_db():
     with connect(None) as conn:
