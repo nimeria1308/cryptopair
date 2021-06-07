@@ -6,7 +6,7 @@ app = Flask(__name__, static_folder=os.path.abspath("."))
 
 @app.route("/")
 def root():
-    return app.send_static_file("pages/index.html")
+    return app.send_static_file("res/pages/index.html")
 
 
 @app.route("/res/<path:path>")
