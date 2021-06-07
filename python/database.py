@@ -9,7 +9,7 @@ DATABASE_INIT = "cryptopair.sql"
 # https://stackoverflow.com/questions/29772337/python-mysql-connector-unread-result-found-when-using-fetchone
 
 
-def connect(database=DATABASE):
+def connect_db(database=DATABASE):
     return mysql.connector.connect(
         host=HOST,
         user=USER,
@@ -25,7 +25,7 @@ def __db_exists(conn):
 
 
 def create_db():
-    with connect(None) as conn:
+    with connect_db(None) as conn:
         if not __db_exists(conn):
             with open(DATABASE_INIT) as f:
                 init_sql = f.read()
@@ -40,7 +40,7 @@ def create_db():
 
 
 def delete_db():
-    with connect(None) as conn:
+    with connect_db(None) as conn:
         if __db_exists(conn):
             with conn.cursor() as cursor:
                 cursor.execute("DROP DATABASE %s" % DATABASE)

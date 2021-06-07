@@ -3,7 +3,7 @@ import json
 import time
 import urllib.request
 
-from database import connect
+from database import connect_db
 
 UPDATE_INTERVAL_SECONDS = 15
 
@@ -46,7 +46,7 @@ def update_data(conn, pairs):
 
 
 def update_db():
-    with connect() as conn:
+    with connect_db() as conn:
         pairs = get_pairs(conn)
         update_data(conn, pairs)
 
