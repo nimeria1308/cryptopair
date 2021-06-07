@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2021 at 09:01 PM
+-- Generation Time: Jun 07, 2021 at 10:51 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 7.4.19
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `cryptopair`
 --
+CREATE DATABASE IF NOT EXISTS `cryptopair` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `cryptopair`;
 
 -- --------------------------------------------------------
 
@@ -46,6 +48,24 @@ CREATE TABLE `currencies` (
   `description` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `currencies`
+--
+
+INSERT INTO `currencies` (`id`, `name`, `description`) VALUES
+(1, 'USD', 'US Dollar'),
+(2, 'EUR', 'Euro'),
+(3, 'CAD', 'Canadian Dollar'),
+(4, 'JPY', 'Japanese Yen'),
+(5, 'GBP', 'British Pound Sterling'),
+(6, 'CHF', 'Swiss Franc'),
+(7, 'AUD', 'Australian Dollar'),
+(8, 'BTC', 'Bitcoin'),
+(9, 'DOGE', 'Dogecoin'),
+(10, 'ETH', 'Ethereum'),
+(11, 'XRP', 'Ripple'),
+(12, 'USDT', 'Tether');
+
 -- --------------------------------------------------------
 
 --
@@ -55,8 +75,49 @@ CREATE TABLE `currencies` (
 CREATE TABLE `pairs` (
   `id` int(11) NOT NULL,
   `base` int(11) NOT NULL,
-  `quote` int(11) NOT NULL
+  `quote` int(11) NOT NULL,
+  `kraken` char(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pairs`
+--
+
+INSERT INTO `pairs` (`id`, `base`, `quote`, `kraken`) VALUES
+(1, 8, 1, 'XXBTZUSD'),
+(2, 8, 2, 'XXBTZEUR'),
+(3, 8, 3, 'XXBTZCAD'),
+(4, 8, 4, 'XXBTZJPY'),
+(5, 8, 5, 'XXBTZGBP'),
+(6, 8, 6, 'XBTCHF'),
+(7, 8, 7, 'XBTAUD'),
+(8, 8, 10, 'TBTCETH'),
+(9, 8, 12, 'XBTUSDT'),
+(10, 10, 1, 'XETHZUSD'),
+(11, 10, 2, 'XETHZEUR'),
+(12, 10, 3, 'XETHZCAD'),
+(13, 10, 4, 'XETHZJPY'),
+(14, 10, 5, 'XETHZGBP'),
+(15, 10, 6, 'ETHCHF'),
+(16, 10, 7, 'ETHAUD'),
+(17, 10, 8, 'XETHXXBT'),
+(18, 10, 12, 'ETHUSDT'),
+(19, 11, 1, 'XXRPZUSD'),
+(20, 11, 2, 'XXRPZEUR'),
+(21, 11, 3, 'XXRPZCAD'),
+(22, 11, 4, 'XXRPZJPY'),
+(23, 11, 5, 'XRPGBP'),
+(24, 11, 7, 'XRPAUD'),
+(25, 11, 8, 'XXRPXXBT'),
+(26, 11, 10, 'XRPETH'),
+(27, 11, 12, 'XRPUSDT'),
+(28, 12, 1, 'USDTZUSD'),
+(29, 12, 2, 'USDTEUR'),
+(30, 12, 3, 'USDTCAD'),
+(31, 12, 4, 'USDTJPY'),
+(32, 12, 5, 'USDTGBP'),
+(33, 12, 6, 'USDTCHF'),
+(34, 12, 7, 'USDTAUD');
 
 --
 -- Indexes for dumped tables
@@ -97,13 +158,13 @@ ALTER TABLE `bids`
 -- AUTO_INCREMENT for table `currencies`
 --
 ALTER TABLE `currencies`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `pairs`
 --
 ALTER TABLE `pairs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- Constraints for dumped tables

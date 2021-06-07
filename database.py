@@ -30,9 +30,6 @@ def create_db():
             with open(DATABASE_INIT) as f:
                 init_sql = f.read()
 
-            init_sql = ("CREATE DATABASE %s;\nUSE %s;\n" %
-                        (DATABASE, DATABASE)) + init_sql
-
             with conn.cursor() as cursor:
                 res = cursor.execute(init_sql, multi=True)
                 # run through the queries
@@ -45,15 +42,3 @@ def delete_db():
         if __db_exists(conn):
             with conn.cursor() as cursor:
                 cursor.execute("DROP DATABASE %s" % DATABASE)
-
-# test
-
-
-with connect(None) as db:
-    print("connected")
-    print(db)
-
-delete_db()
-delete_db()
-create_db()
-create_db()
