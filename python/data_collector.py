@@ -4,21 +4,11 @@ import time
 import urllib.request
 
 from database import connect_db
+from model import model_get_pairs, model_insert_bid
 
 UPDATE_INTERVAL_SECONDS = 15
 
 URL = "https://api.kraken.com/0/public/Ticker?pair="
-
-LIST_PAIRS = r"SELECT `id`, `kraken` FROM `pairs`"
-INSERT_PAIR = r"""
-INSERT INTO `bids` (`id`, `pair`, `timestamp`, `bid`) VALUES (NULL, '%d', current_timestamp(), '%f')
-"""
-
-
-def get_pairs(conn):
-    with conn.cursor() as cursor:
-        cursor.execute(LIST_PAIRS)
-        return {c[0]: c[1] for c in cursor}
 
 
 def fetch_data(conn, pairs):
@@ -39,15 +29,13 @@ def update_data(conn, pairs):
         #               'b': ['0.000025590', '38954', '38954.000'],
         bid = data[pair]["b"][0]
         bid = float(bid)
-        with conn.cursor() as cursor:
-            insert_sql = INSERT_PAIR % (id, bid)
-            cursor.execute(insert_sql)
+        model_insert_bid(conn, id, bid)
     conn.commit()
 
 
 def update_db():
     with connect_db() as conn:
-        pairs = get_pairs(conn)
+        pairs = model_get_pairs(conn)
         update_data(conn, pairs)
 
 
