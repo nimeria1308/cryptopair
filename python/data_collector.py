@@ -1,5 +1,6 @@
 import datetime
 import json
+import sys
 import time
 import urllib.request
 
@@ -39,7 +40,11 @@ def update_db():
         update_data(conn, pairs)
 
 
-print("Updating every %s s" % UPDATE_INTERVAL_SECONDS)
+update_interval = UPDATE_INTERVAL_SECONDS
+if len(sys.argv) > 1:
+    update_interval = float(sys.argv[1])
+
+print("Updating every %s s" % update_interval)
 
 while True:
     print("Fetching new data at %s" % datetime.datetime.now().time())
@@ -48,4 +53,4 @@ while True:
     except Exception as e:
         print("Warning: %s" % e)
 
-    time.sleep(UPDATE_INTERVAL_SECONDS)
+    time.sleep(update_interval)
