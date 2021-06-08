@@ -61,10 +61,9 @@ INSERT INTO `currencies` (`id`, `name`, `description`) VALUES
 (6, 'CHF', 'Swiss Franc'),
 (7, 'AUD', 'Australian Dollar'),
 (8, 'BTC', 'Bitcoin'),
-(9, 'DOGE', 'Dogecoin'),
-(10, 'ETH', 'Ethereum'),
-(11, 'XRP', 'Ripple'),
-(12, 'USDT', 'Tether');
+(9, 'ETH', 'Ethereum'),
+(10, 'XRP', 'Ripple'),
+(11, 'USDT', 'Tether');
 
 -- --------------------------------------------------------
 
@@ -91,33 +90,33 @@ INSERT INTO `pairs` (`id`, `base`, `quote`, `kraken`) VALUES
 (5, 8, 5, 'XXBTZGBP'),
 (6, 8, 6, 'XBTCHF'),
 (7, 8, 7, 'XBTAUD'),
-(8, 8, 10, 'TBTCETH'),
-(9, 8, 12, 'XBTUSDT'),
-(10, 10, 1, 'XETHZUSD'),
-(11, 10, 2, 'XETHZEUR'),
-(12, 10, 3, 'XETHZCAD'),
-(13, 10, 4, 'XETHZJPY'),
-(14, 10, 5, 'XETHZGBP'),
-(15, 10, 6, 'ETHCHF'),
-(16, 10, 7, 'ETHAUD'),
-(17, 10, 8, 'XETHXXBT'),
-(18, 10, 12, 'ETHUSDT'),
-(19, 11, 1, 'XXRPZUSD'),
-(20, 11, 2, 'XXRPZEUR'),
-(21, 11, 3, 'XXRPZCAD'),
-(22, 11, 4, 'XXRPZJPY'),
-(23, 11, 5, 'XRPGBP'),
-(24, 11, 7, 'XRPAUD'),
-(25, 11, 8, 'XXRPXXBT'),
-(26, 11, 10, 'XRPETH'),
-(27, 11, 12, 'XRPUSDT'),
-(28, 12, 1, 'USDTZUSD'),
-(29, 12, 2, 'USDTEUR'),
-(30, 12, 3, 'USDTCAD'),
-(31, 12, 4, 'USDTJPY'),
-(32, 12, 5, 'USDTGBP'),
-(33, 12, 6, 'USDTCHF'),
-(34, 12, 7, 'USDTAUD');
+(8, 8, 9, 'TBTCETH'),
+(9, 8, 11, 'XBTUSDT'),
+(10, 9, 1, 'XETHZUSD'),
+(11, 9, 2, 'XETHZEUR'),
+(12, 9, 3, 'XETHZCAD'),
+(13, 9, 4, 'XETHZJPY'),
+(14, 9, 5, 'XETHZGBP'),
+(15, 9, 6, 'ETHCHF'),
+(16, 9, 7, 'ETHAUD'),
+(17, 9, 8, 'XETHXXBT'),
+(18, 9, 11, 'ETHUSDT'),
+(19, 10, 1, 'XXRPZUSD'),
+(20, 10, 2, 'XXRPZEUR'),
+(21, 10, 3, 'XXRPZCAD'),
+(22, 10, 4, 'XXRPZJPY'),
+(23, 10, 5, 'XRPGBP'),
+(24, 10, 7, 'XRPAUD'),
+(25, 10, 8, 'XXRPXXBT'),
+(26, 10, 9, 'XRPETH'),
+(27, 10, 11, 'XRPUSDT'),
+(28, 11, 1, 'USDTZUSD'),
+(29, 11, 2, 'USDTEUR'),
+(30, 11, 3, 'USDTCAD'),
+(31, 11, 4, 'USDTJPY'),
+(32, 11, 5, 'USDTGBP'),
+(33, 11, 6, 'USDTCHF'),
+(34, 11, 7, 'USDTAUD');
 
 --
 -- Indexes for dumped tables
@@ -158,7 +157,7 @@ ALTER TABLE `bids`
 -- AUTO_INCREMENT for table `currencies`
 --
 ALTER TABLE `currencies`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `pairs`
