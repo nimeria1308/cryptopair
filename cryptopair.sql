@@ -90,33 +90,32 @@ INSERT INTO `pairs` (`id`, `base`, `quote`, `kraken`) VALUES
 (5, 8, 5, 'XXBTZGBP'),
 (6, 8, 6, 'XBTCHF'),
 (7, 8, 7, 'XBTAUD'),
-(8, 8, 9, 'TBTCETH'),
-(9, 8, 11, 'XBTUSDT'),
-(10, 9, 1, 'XETHZUSD'),
-(11, 9, 2, 'XETHZEUR'),
-(12, 9, 3, 'XETHZCAD'),
-(13, 9, 4, 'XETHZJPY'),
-(14, 9, 5, 'XETHZGBP'),
-(15, 9, 6, 'ETHCHF'),
-(16, 9, 7, 'ETHAUD'),
-(17, 9, 8, 'XETHXXBT'),
-(18, 9, 11, 'ETHUSDT'),
-(19, 10, 1, 'XXRPZUSD'),
-(20, 10, 2, 'XXRPZEUR'),
-(21, 10, 3, 'XXRPZCAD'),
-(22, 10, 4, 'XXRPZJPY'),
-(23, 10, 5, 'XRPGBP'),
-(24, 10, 7, 'XRPAUD'),
-(25, 10, 8, 'XXRPXXBT'),
-(26, 10, 9, 'XRPETH'),
-(27, 10, 11, 'XRPUSDT'),
-(28, 11, 1, 'USDTZUSD'),
-(29, 11, 2, 'USDTEUR'),
-(30, 11, 3, 'USDTCAD'),
-(31, 11, 4, 'USDTJPY'),
-(32, 11, 5, 'USDTGBP'),
-(33, 11, 6, 'USDTCHF'),
-(34, 11, 7, 'USDTAUD');
+(8, 8, 11, 'XBTUSDT'),
+(9, 9, 1, 'XETHZUSD'),
+(10, 9, 2, 'XETHZEUR'),
+(11, 9, 3, 'XETHZCAD'),
+(12, 9, 4, 'XETHZJPY'),
+(13, 9, 5, 'XETHZGBP'),
+(14, 9, 6, 'ETHCHF'),
+(15, 9, 7, 'ETHAUD'),
+(16, 9, 8, 'XETHXXBT'),
+(17, 9, 11, 'ETHUSDT'),
+(18, 10, 1, 'XXRPZUSD'),
+(19, 10, 2, 'XXRPZEUR'),
+(20, 10, 3, 'XXRPZCAD'),
+(21, 10, 4, 'XXRPZJPY'),
+(22, 10, 5, 'XRPGBP'),
+(23, 10, 7, 'XRPAUD'),
+(24, 10, 8, 'XXRPXXBT'),
+(25, 10, 9, 'XRPETH'),
+(26, 10, 11, 'XRPUSDT'),
+(27, 11, 1, 'USDTZUSD'),
+(28, 11, 2, 'USDTEUR'),
+(29, 11, 3, 'USDTCAD'),
+(30, 11, 4, 'USDTJPY'),
+(31, 11, 5, 'USDTGBP'),
+(32, 11, 6, 'USDTCHF'),
+(33, 11, 7, 'USDTAUD');
 
 --
 -- Indexes for dumped tables
@@ -163,7 +162,7 @@ ALTER TABLE `currencies`
 -- AUTO_INCREMENT for table `pairs`
 --
 ALTER TABLE `pairs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- Constraints for dumped tables
