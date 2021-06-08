@@ -140,7 +140,8 @@ ALTER TABLE `currencies`
 ALTER TABLE `pairs`
   ADD PRIMARY KEY (`id`),
   ADD KEY `base` (`base`),
-  ADD KEY `quote` (`quote`);
+  ADD KEY `quote` (`quote`),
+  ADD UNIQUE(`base`, `quote`);
 
 --
 -- AUTO_INCREMENT for dumped tables
