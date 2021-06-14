@@ -12,7 +12,7 @@ UPDATE_INTERVAL_SECONDS = 15
 URL = "https://api.kraken.com/0/public/Ticker?pair="
 
 
-def fetch_data(conn, pairs):
+def fetch_data(pairs):
     url = URL + ",".join(pairs.values())
     with urllib.request.urlopen(url) as response:
         json_response = json.load(response)
@@ -24,7 +24,7 @@ def fetch_data(conn, pairs):
 
 
 def update_data(conn, pairs):
-    data = fetch_data(conn, pairs)
+    data = fetch_data(pairs)
     for id, pair in pairs.items():
         #  'XXRPXXBT': {'a': ['0.000025600', '6969', '6969.000'],
         #               'b': ['0.000025590', '38954', '38954.000'],
@@ -36,7 +36,7 @@ def update_data(conn, pairs):
 
 def update_db():
     with connect_db() as conn:
-        pairs = model_get_pairs(conn)
+        pairs = {key: value[2] for key, value in model_get_pairs(conn).items()}
         update_data(conn, pairs)
 
 
