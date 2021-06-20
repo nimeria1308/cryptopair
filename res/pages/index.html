@@ -2,11 +2,15 @@
 
 <head>
     <title>Cryptopair stats</title>
+    <script src="res/scripts/chart.min.js"></script>
     <script src="res/scripts/json_download.js"></script>
     <script src="res/scripts/main.js"></script>
 </head>
 
 <body onload="page_loaded();">
+    <div style="width: 600px; height: 300px;">
+        <canvas id="chart"></canvas>
+    </div>
     <select id="currency_pairs" onchange="draw_chart();">
     </select>
     <select id="period" onchange="draw_chart()">
