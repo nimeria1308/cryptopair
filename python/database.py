@@ -38,6 +38,10 @@ def create_db():
 
             conn.commit()
 
+            return False
+
+    return True
+
 
 def delete_db():
     with connect_db(None) as conn:

@@ -24,15 +24,3 @@ def ohclvt_insert_entries(conn, pair, entries):
                          timestamp.strftime("'%Y-%m-%d %H:%M:%S'"))
 
     conn.commit()
-
-def main():
-    _, filename, base, quote = sys.argv
-
-    entries = ohclvt_parse_file(filename)
-
-    with connect_db() as conn:
-        pair = model_find_pair(conn, base, quote)
-        print("inserting %d entries into %s:%d" % (len(entries), pair[1], pair[0]))
-        ohclvt_insert_entries(conn, pair, entries)
-
-main()
