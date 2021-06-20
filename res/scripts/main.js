@@ -20,6 +20,17 @@ function fill_pairs() {
     }
 }
 
+function draw_chart() {
+    const pairs_select = document.getElementById("currency_pairs");
+    const pair_id = pairs_select.value;
+
+    const period_select = document.getElementById("period");
+    const period = period_select.value;
+
+    alert(`New pair id ${pair_id} for period ${period}`);
+    // TODO
+}
+
 function page_loaded() {
     get_json("/api/currencies", function (c) {
         currencies = c;
@@ -27,6 +38,7 @@ function page_loaded() {
             pairs = p;
 
             fill_pairs();
+            draw_chart();
         });
     })
 }

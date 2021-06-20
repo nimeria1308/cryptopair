@@ -7,7 +7,13 @@
 </head>
 
 <body onload="page_loaded();">
-    <select id="currency_pairs">
+    <select id="currency_pairs" onchange="draw_chart();">
+    </select>
+    <select id="period" onchange="draw_chart()">
+        <option value="year">Yearly</option>
+        <option value="month">Monthly</option>
+        <option value="day">Daily</option>
+        <option value="hour">Hourly</option>
     </select>
 </body>
 
