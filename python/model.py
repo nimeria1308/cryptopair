@@ -1,12 +1,12 @@
 from database import connect_db
 
-LIST_CURRENCIES_SQL = r"SELECT * FROM `currencies`"
+LIST_CURRENCIES_SQL = "SELECT * FROM `currencies`"
 
-LIST_PAIRS_SQL = r"SELECT * FROM `pairs`"
+LIST_PAIRS_SQL = "SELECT * FROM `pairs`"
 
-INSERT_BID_SQL = r"INSERT INTO `bids` (`id`, `pair`, `timestamp`, `bid`) VALUES (NULL, '%d', %s, '%f')"
+INSERT_BID_SQL = "INSERT INTO `bids` (`id`, `pair`, `timestamp`, `bid`) VALUES (NULL, '%d', %s, '%f')"
 
-FIND_PAIR_SQL = r"""
+FIND_PAIR_SQL = """
 SELECT `pairs`.`id`, `pairs`.`kraken` FROM `pairs`
 INNER JOIN `currencies` AS c1 ON `pairs`.`base`=`c1`.`id`
 INNER JOIN `currencies` AS c2 ON `pairs`.`quote`=`c2`.`id`
