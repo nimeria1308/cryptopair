@@ -33,6 +33,12 @@ def pairs():
         return json.dumps(pairs)
 
 
+@app.route("/api/pair/<int:pair_id>")
+def bids_realtime(pair_id):
+    with connect_db() as conn:
+        bids = model_get_bids_realtime(conn, pair_id)
+        return json.dumps(bids)
+
 @app.route("/api/pair/<int:pair_id>/year")
 def bids_by_year(pair_id):
     with connect_db() as conn:

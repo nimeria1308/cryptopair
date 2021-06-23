@@ -63,3 +63,13 @@ def model_get_bids_by_day(conn, pair_id, year, month):
         ORDER BY `day`;
     """ % (year, month, year, month, pair_id)
     return execute_sql(conn, sql)
+
+
+def model_get_bids_realtime(conn, pair_id):
+    sql = """
+        SELECT bid, UNIX_TIMESTAMP(`timestamp`)
+        FROM cryptopair.bids
+        WHERE timestamp BETWEEN DATE_SUB(now(), interval 1 day) AND now() AND pair = %s
+        ORDER BY timestamp;
+    """ % (pair_id)
+    return execute_sql(conn, sql)
