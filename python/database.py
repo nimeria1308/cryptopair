@@ -18,10 +18,16 @@ def connect_db(database=DATABASE):
         buffered=True)
 
 
-def __db_exists(conn):
+def execute_sql(conn, sql, skip_result=False):
     with conn.cursor() as cursor:
-        cursor.execute("SHOW DATABASES")
-        return (DATABASE,) in cursor
+        cursor.execute(sql)
+        if not skip_result:
+            return cursor.fetchall()
+
+
+def __db_exists(conn):
+    result = execute_sql(conn, "SHOW DATABASES")
+    return (DATABASE,) in result
 
 
 def create_db():
@@ -46,5 +52,4 @@ def create_db():
 def delete_db():
     with connect_db(None) as conn:
         if __db_exists(conn):
-            with conn.cursor() as cursor:
-                cursor.execute("DROP DATABASE %s" % DATABASE)
+            execute_sql(conn, "DROP DATABASE %s" % DATABASE, True)
