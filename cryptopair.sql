@@ -33,7 +33,7 @@ CREATE TABLE `bids` (
   `id` int(11) NOT NULL,
   `pair` int(11) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
-  `bid` decimal(15,5) NOT NULL
+  `bid` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
