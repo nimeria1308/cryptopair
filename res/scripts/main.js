@@ -20,6 +20,19 @@ function fill_pairs() {
     }
 }
 
+const month_names = [
+    "January", "February", "March", "April",
+    "May", "June", "July", "August",
+    "September", "October", "November", "December"
+];
+
+function select_changed() {
+    // todo hide non-relevant items
+    draw_chart();
+}
+
+var chart;
+
 function draw_chart() {
     const pairs_select = document.getElementById("currency_pairs");
     const pair_id = pairs_select.value;
@@ -27,48 +40,105 @@ function draw_chart() {
     const period_select = document.getElementById("period");
     const period = period_select.value;
 
-    console.log(`New pair id ${pair_id} for period ${period}`);
-    var ctx = document.getElementById('chart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
+    const year_select = document.getElementById("year");
+    const year = year_select.value;
+
+    const month_select = document.getElementById("month");
+    const month = month_select.value;
+
+    const ctx = document.getElementById('chart').getContext('2d');
+
+    var url;
+    switch (period) {
+        case "year":
+            url = `/api/pair/${pair_id}/year`;
+            break;
+        case "month":
+            url = `/api/pair/${pair_id}/month/${year}`;
+            break;
+        case "day":
+            url = `/api/pair/${pair_id}/day/${year}/${month}`;
+            break;
+        case "realtime":
+            url = `/api/pair/${pair_id}`;
+            break;
+    }
+
+    get_json(url, function(bid_data) {
+        // prepare data
+        const labels = []
+        const bids = []
+
+        const pair = pairs[pair_id];
+        const base = currencies[pair[0]];
+        const quote = currencies[pair[1]];
+
+        for (i in bid_data) {
+            bids.push(bid_data[i][0]);
+            labels.push(bid_data[i][1]);
         }
+
+        const data_text = `${base[1]} (${base[0]}) in ${quote[1]} (${quote[0]})`
+
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: data_text,
+                data: bids,
+                borderColor: 'rgb(255, 99, 132)',
+                tension: 0.4
+            }]
+        }
+
+        // Period text as title
+        const title = period_select.options[period_select.selectedIndex].text;
+
+        // prepare config
+        const config = {
+            type: 'line',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: title,
+                    },
+                },
+                interaction: {
+                    intersect: false,
+                },
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: `${base[1]} (${base[0]})`
+                        }
+                    },
+                    y: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: `${quote[1]} (${quote[0]})`
+                        },
+                    }
+                }
+            },
+        };
+
+        if (chart) {
+            chart.destroy();
+        }
+
+        chart = new Chart(ctx, config);
     });
 }
 
 function page_loaded() {
-    get_json("/api/currencies", function (c) {
+    get_json("/api/currencies", function(c) {
         currencies = c;
-        get_json("/api/pairs", function (p) {
+        get_json("/api/pairs", function(p) {
             pairs = p;
 
             fill_pairs();
