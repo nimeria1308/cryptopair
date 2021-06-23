@@ -27,7 +27,26 @@ const month_names = [
 ];
 
 function select_changed() {
-    // todo hide non-relevant items
+    const period = document.getElementById("period").value;
+    const year_select = document.getElementById("year");
+    const month_select = document.getElementById("month");
+
+    var show_year = false;
+    var show_month = false;
+
+    switch (period) {
+        case "month":
+            show_year = true;
+            break;
+        case "day":
+            show_year = true;
+            show_month = true;
+            break;
+    }
+
+    year_select.style.display = show_year ? "inline-block" : "none";
+    month_select.style.display = show_month ? "inline-block" : "none";
+
     draw_chart();
 }
 
