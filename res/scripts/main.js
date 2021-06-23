@@ -65,6 +65,9 @@ function draw_chart() {
     const month_select = document.getElementById("month");
     const month = month_select.value;
 
+    const interpolate_select = document.getElementById("interpolate");
+    const interpolate = interpolate_select.checked;
+
     const ctx = document.getElementById('chart').getContext('2d');
 
     var url;
@@ -121,7 +124,7 @@ function draw_chart() {
                 label: data_text,
                 data: bids,
                 borderColor: 'rgb(255, 99, 132)',
-                tension: 0.4
+                tension: interpolate ? 0.4 : 0
             }]
         }
 
