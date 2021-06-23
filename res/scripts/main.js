@@ -21,9 +21,9 @@ function fill_pairs() {
 }
 
 const month_names = [
-    "January", "February", "March", "April",
-    "May", "June", "July", "August",
-    "September", "October", "November", "December"
+    "JAN", "FEB", "MAR", "APR",
+    "MAY", "JUN", "JUL", "AUG",
+    "SEP", "OCT", "NOV", "DEC"
 ];
 
 function select_changed() {
@@ -93,8 +93,18 @@ function draw_chart() {
         const quote = currencies[pair[1]];
 
         for (i in bid_data) {
-            bids.push(bid_data[i][0]);
-            labels.push(bid_data[i][1]);
+            var bid = bid_data[i][0];
+            var time_value = bid_data[i][1];
+
+            switch (period) {
+                case "month":
+                    // convert number to month string
+                    time_value = month_names[time_value];
+                    break;
+            }
+
+            bids.push(bid);
+            labels.push(time_value);
         }
 
         const data_text = `${base[1]} (${base[0]}) in ${quote[1]} (${quote[0]})`
