@@ -30,3 +30,36 @@ def model_insert_bid(conn, pair_id, bid, timestamp="current_timestamp()"):
         VALUES (NULL, '%d', %s, '%f');
     """ % (pair_id, timestamp, bid)
     execute_sql(conn, sql, True)
+
+
+def model_get_bids_by_year(conn, pair_id):
+    sql = """
+        SELECT AVG(bid) as bid, YEAR(`timestamp`) as year
+        FROM cryptopair.bids
+        WHERE timestamp AND pair = %d
+        GROUP BY YEAR(`timestamp`)
+        ORDER BY `year`;
+    """ % pair_id
+    return execute_sql(conn, sql)
+
+
+def model_get_bids_by_month(conn, pair_id, year):
+    sql = """
+        SELECT AVG(bid) as bid, MONTH(`timestamp`) as month
+        FROM cryptopair.bids
+        WHERE YEAR(`timestamp`) BETWEEN %d AND %d AND pair = %d
+        GROUP BY MONTH(`timestamp`)
+        ORDER BY `month`;
+    """ % (year, year+1, pair_id)
+    return execute_sql(conn, sql)
+
+
+def model_get_bids_by_day(conn, pair_id, year, month):
+    sql = """
+        SELECT AVG(bid) as bid, DAY(`timestamp`) as day
+        FROM cryptopair.bids
+        WHERE timestamp BETWEEN '%d-%d-01' AND DATE_ADD('%d-%d-01', interval 1 month) AND pair = %s
+        GROUP BY DAY(`timestamp`)
+        ORDER BY `day`;
+    """ % (year, month, year, month, pair_id)
+    return execute_sql(conn, sql)

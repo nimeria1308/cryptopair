@@ -1,6 +1,6 @@
 from flask import Flask, send_from_directory
 from database import connect_db
-from model import model_get_currencies, model_get_pairs
+from model import *
 
 import json
 import os
@@ -31,3 +31,24 @@ def pairs():
     with connect_db() as conn:
         pairs = model_get_pairs(conn)
         return json.dumps(pairs)
+
+
+@app.route("/api/pair/<int:pair_id>/year")
+def bids_by_year(pair_id):
+    with connect_db() as conn:
+        bids = model_get_bids_by_year(conn, pair_id)
+        return json.dumps(bids)
+
+
+@app.route("/api/pair/<int:pair_id>/month/<int:year>")
+def bids_by_month(pair_id, year):
+    with connect_db() as conn:
+        bids = model_get_bids_by_month(conn, pair_id, year)
+        return json.dumps(bids)
+
+
+@app.route("/api/pair/<int:pair_id>/day/<int:year>/<int:month>")
+def bids_by_day(pair_id, year, month):
+    with connect_db() as conn:
+        bids = model_get_bids_by_day(conn, pair_id, year, month)
+        return json.dumps(bids)
