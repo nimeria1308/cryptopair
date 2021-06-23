@@ -51,8 +51,15 @@ function select_changed() {
 }
 
 var chart;
+var realtime_timeout;
 
 function draw_chart() {
+    if (realtime_timeout) {
+        // cancel any previous automatic updates
+        clearTimeout(realtime_timeout);
+        realtime_timeout = null;
+    }
+
     const pairs_select = document.getElementById("currency_pairs");
     const pair_id = pairs_select.value;
 
@@ -170,6 +177,11 @@ function draw_chart() {
         }
 
         chart = new Chart(ctx, config);
+
+        if (period == "realtime") {
+            // update every 5 sec
+            realtime_timeout = setTimeout(draw_chart, 5000);
+        }
     });
 }
 
