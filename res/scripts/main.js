@@ -102,14 +102,11 @@ function draw_chart() {
                     time_value = month_names[time_value];
                     break;
                 case "realtime":
-                    console.log(time_value);
                     // convert unix timestamp (in seconds) to date
                     time_value = new Date(time_value * 1000);
-                    console.log(time_value);
 
                     // convert to HH:MM:SS
                     time_value = `${time_value.getHours()}:${time_value.getMinutes()}:${time_value.getSeconds()}`
-                    console.log(time_value);
             }
 
             bids.push(bid);
