@@ -93,7 +93,7 @@ function draw_chart() {
             break;
     }
 
-    get_json(url, function(bid_data) {
+    get_json(url, function (bid_data) {
         // prepare data
         const labels = []
         const bids = []
@@ -172,23 +172,26 @@ function draw_chart() {
             },
         };
 
+        if (period == "realtime") {
+            // disable animation when periodically updating in realtime
+            config["options"]["animation"] = { "duration": 0 };
+
+            // update every 5 sec
+            realtime_timeout = setTimeout(draw_chart, 5000);
+        }
+
         if (chart) {
             chart.destroy();
         }
 
         chart = new Chart(ctx, config);
-
-        if (period == "realtime") {
-            // update every 5 sec
-            realtime_timeout = setTimeout(draw_chart, 5000);
-        }
     });
 }
 
 function page_loaded() {
-    get_json("/api/currencies", function(c) {
+    get_json("/api/currencies", function (c) {
         currencies = c;
-        get_json("/api/pairs", function(p) {
+        get_json("/api/pairs", function (p) {
             pairs = p;
 
             fill_pairs();
