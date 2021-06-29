@@ -1,2 +1,2 @@
 @echo off
-python python\data_collector.py %*
+python python\data_collector.py
