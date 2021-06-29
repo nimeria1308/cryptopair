@@ -5,9 +5,9 @@ function get_json(url, handler) {
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function () {
         const text = xhttp.responseText;
-        const json_result = JSON.parse(text)
+        const json_result = JSON.parse(text);
         handler(json_result);
-    }
+    };
 
     xhttp.open("GET", url);
     xhttp.send();
@@ -107,8 +107,8 @@ function draw_chart() {
 
     get_json(url, function (bid_data) {
         // prepare data
-        const labels = []
-        const bids = []
+        const labels = [];
+        const bids = [];
 
         const pair = pairs[pair_id];
         const base = currencies[pair[0]];
@@ -120,22 +120,23 @@ function draw_chart() {
 
             switch (period) {
                 case "month":
-                    // convert number to month string
-                    time_value = month_names[time_value];
+                    // convert number to month string (note that months start at 1, array starts at 0)
+                    time_value = month_names[time_value - 1];
                     break;
                 case "realtime":
                     // convert unix timestamp (in seconds) to date
                     time_value = new Date(time_value * 1000);
 
                     // convert to HH:MM:SS
-                    time_value = `${time_value.getHours()}:${time_value.getMinutes()}:${time_value.getSeconds()}`
+                    time_value = `${time_value.getHours()}:${time_value.getMinutes()}:${time_value.getSeconds()}`;
+                    break;
             }
 
             bids.push(bid);
             labels.push(time_value);
         }
 
-        const data_text = `${base[1]} (${base[0]}) in ${quote[1]} (${quote[0]})`
+        const data_text = `${base[1]} (${base[0]}) in ${quote[1]} (${quote[0]})`;
 
         const data = {
             labels: labels,
@@ -145,7 +146,7 @@ function draw_chart() {
                 borderColor: 'rgb(255, 99, 132)',
                 tension: interpolate ? 0.4 : 0
             }]
-        }
+        };
 
         // Period text as title
         const title = period_select.options[period_select.selectedIndex].text;
@@ -159,11 +160,11 @@ function draw_chart() {
                 plugins: {
                     title: {
                         display: true,
-                        text: title,
-                    },
+                        text: title
+                    }
                 },
                 interaction: {
-                    intersect: false,
+                    intersect: false
                 },
                 scales: {
                     x: {
@@ -178,13 +179,13 @@ function draw_chart() {
                         title: {
                             display: true,
                             text: `${quote[1]} (${quote[0]})`
-                        },
+                        }
                     }
                 }
-            },
+            }
         };
 
-        if (period == "realtime") {
+        if (period === "realtime") {
             // disable animation when periodically updating in realtime
             config["options"]["animation"] = { "duration": 0 };
 
@@ -209,5 +210,5 @@ function page_loaded() {
             fill_pairs();
             draw_chart();
         });
-    })
+    });
 }
