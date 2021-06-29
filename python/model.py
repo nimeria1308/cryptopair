@@ -1,8 +1,20 @@
-from database import connect_db, execute_sql
+from database import execute_sql
 
 
 def _model_list(conn, sql):
-    return {c[0]: c[1:] for c in execute_sql(conn, sql)}
+    result = {}
+
+    sql_result = execute_sql(conn, sql)
+    # print(sql)
+    # print(sql_result)
+
+    for item in sql_result:
+        key = item[0]
+        values = item[1:]
+        result[key] = values
+
+    # print(result)
+    return result
 
 
 def model_get_currencies(conn):
@@ -21,7 +33,7 @@ def model_find_pair(conn, base_name, quote_name):
         WHERE `c1`.`name` = '%s' AND `c2`.`name` = '%s';
     """ % (base_name, quote_name)
     result = execute_sql(conn, sql)
-    return [c for c in result][0]
+    return result[0]
 
 
 def model_insert_bid(conn, pair_id, bid, timestamp="current_timestamp()"):

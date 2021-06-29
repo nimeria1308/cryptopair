@@ -36,7 +36,9 @@ def update_data(conn, pairs):
 
 def update_db():
     with connect_db() as conn:
-        pairs = {key: value[2] for key, value in model_get_pairs(conn).items()}
+        pairs = {}
+        for key, value in model_get_pairs(conn).items():
+            pairs[key] = value[2]
         update_data(conn, pairs)
 
 
